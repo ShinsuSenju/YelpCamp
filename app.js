@@ -3,7 +3,6 @@ const { default: mongoose } = require("mongoose");
 const app = express();
 const path = require("path");
 const Campground = require("./models/campground");
-const campground = require("./models/campground");
 
 mongoose.connect("mongodb://localhost:27017/yelp-camp");
 const db = mongoose.connection;
