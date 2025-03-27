@@ -2,6 +2,7 @@ const { ref } = require("joi");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const review = require("./review");
+const user = require("./user");
 
 const CampgroundSchema = new Schema({
   title: String,
@@ -9,6 +10,10 @@ const CampgroundSchema = new Schema({
   price: Number,
   description: String,
   location: String,
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
   reviews: [
     {
       type: Schema.Types.ObjectId,
