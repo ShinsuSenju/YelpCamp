@@ -6,7 +6,9 @@ const ExpressError = require("./utils/ExpressError");
 // Middleware to check if the user is logged in
 module.exports.isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
-    req.session.returnTo = req.originalUrl; // Store intended URL
+    if (req.method === "GET") {
+      req.session.returnTo = req.originalUrl; // Store intended URL only for GET requests
+    }
     req.flash("error", "You must be signed in first!");
     return res.redirect("/login");
   }
