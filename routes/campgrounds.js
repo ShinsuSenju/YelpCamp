@@ -2,6 +2,10 @@ const express = require("express");
 const router = express.Router();
 const catchAsync = require("../utils/catchAsync.js");
 const campgrounds = require("../controllers/campgrounds.js");
+const multer = require("multer");
+const { storage } = require("../cloudinary");
+const upload = multer({ storage });
+
 const {
   isLoggedIn,
   validateCampground,
@@ -13,6 +17,7 @@ router
   .get(catchAsync(campgrounds.index)) // Get all campgrounds
   .post(
     isLoggedIn,
+    upload.array("image"),
     validateCampground,
     catchAsync(campgrounds.createCampground)
   ); // Create a new campground
@@ -25,6 +30,7 @@ router
   .put(
     isLoggedIn,
     isAuthor,
+    upload.array("image"),
     validateCampground,
     catchAsync(campgrounds.updateCampground)
   ) // Update a campground
@@ -34,6 +40,7 @@ router.get(
   "/:id/edit",
   isLoggedIn,
   isAuthor,
+
   catchAsync(campgrounds.renderEditCampground)
 ); // Render form to edit a campground
 

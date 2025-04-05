@@ -25,10 +25,32 @@ const seedDB = async () => {
       author: "67e0310e171b3b17c16c82f1",
       location: `${cities[random1000].city}, ${cities[random1000].state}`,
       title: `${sample(descriptors)} ${sample(places)}`,
-      image: `https://picsum.photos/seed/${i}/400/300`, // Added dimensions
+
       description:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio voluptatum aperiam deserunt, vero quidem veritatis velit, porro accusantium a unde incidunt atque voluptates aliquid explicabo vitae, corporis tempore adipisci at!",
       price: price,
+      images: [
+        {
+          url: "https://res.cloudinary.com/dqoevvmpp/image/upload/v1743830389/YelpCamp/tou6ho1uecsmgytkvg0g.jpg",
+          filename: "YelpCamp/tou6ho1uecsmgytkvg0g",
+        },
+        {
+          url: "https://res.cloudinary.com/dqoevvmpp/image/upload/v1743830390/YelpCamp/fxzgehvcezgdwg7thvdv.jpg",
+          filename: "YelpCamp/fxzgehvcezgdwg7thvdv",
+        },
+        {
+          url: "https://res.cloudinary.com/dqoevvmpp/image/upload/v1743830389/YelpCamp/jt224am77p2r1dgl1yxg.jpg",
+          filename: "YelpCamp/jt224am77p2r1dgl1yxg",
+        },
+        {
+          url: "https://res.cloudinary.com/dqoevvmpp/image/upload/v1743830390/YelpCamp/t29f4wi8r54fjzmyhxgj.jpg",
+          filename: "YelpCamp/t29f4wi8r54fjzmyhxgj",
+        },
+        {
+          url: "https://res.cloudinary.com/dqoevvmpp/image/upload/v1743830390/YelpCamp/lllrbzg3b9aqhffpamje.jpg",
+          filename: "YelpCamp/lllrbzg3b9aqhffpamje",
+        },
+      ],
     });
     await camp.save();
   }

@@ -5,11 +5,42 @@
   <!-- Left Column: Campground Details -->
   <div class="col-md-6">
     <div class="card mb-3">
-      <img
-        src="<%= campground.image %>"
-        class="card-img-top"
-        alt="<%= campground.title %>"
-      />
+      <!-- Carousel for Campground Images -->
+      <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <% campground.images.forEach((img, idx) => { %>
+          <div class="carousel-item <%= idx === 0 ? 'active' : '' %>">
+            <img
+              src="<%= img.url %>"
+              class="d-block w-100"
+              alt="<%= campground.title %>"
+            />
+          </div>
+          <% }) %>
+        </div>
+        <% if(campground.images.length > 1) { %>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExample"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExample"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+        <% } %>
+      </div>
+
+      <!-- Campground Details -->
       <div class="card-body">
         <h5 class="card-title"><%= campground.title %></h5>
         <p class="card-text"><%= campground.description %></p>
@@ -19,16 +50,14 @@
         <li class="list-group-item text-muted">
           Submitted By - <%= campground.author.username %>
         </li>
-        <li class="list-group-item">$ <%= campground.price %> per night</li>
+        <li class="list-group-item">$<%= campground.price %> per night</li>
       </ul>
+
       <% if (currentUser && campground.author.equals(currentUser._id)) { %>
       <div class="card-body">
-        <a
-          href="/campgrounds/<%= campground._id %>/edit"
-          class="card-link btn btn-info"
+        <a href="/campgrounds/<%= campground._id %>/edit" class="btn btn-info"
+          >Edit Campground</a
         >
-          Edit Campground
-        </a>
         <form
           class="d-inline"
           action="/campgrounds/<%= campground._id %>?_method=delete"
@@ -51,32 +80,17 @@
         <div class="mb-3">
           <fieldset class="starability-grow">
             <legend>Rating</legend>
+            <% for (let i = 1; i <= 5; i++) { %>
             <input
               type="radio"
-              id="no-rate"
-              class="input-no-rate"
+              id="rate<%= i %>"
               name="review[rating]"
-              value="1"
-              checked
-              aria-label="No rating."
+              value="<%= i %>"
             />
-
-            <input type="radio" id="rate1" name="review[rating]" value="1" />
-            <label for="rate1">1 star.</label>
-
-            <input type="radio" id="rate2" name="review[rating]" value="2" />
-            <label for="rate2">2 stars.</label>
-
-            <input type="radio" id="rate3" name="review[rating]" value="3" />
-            <label for="rate3">3 stars.</label>
-
-            <input type="radio" id="rate4" name="review[rating]" value="4" />
-            <label for="rate4">4 stars.</label>
-
-            <input type="radio" id="rate5" name="review[rating]" value="5" />
-            <label for="rate5">5 stars.</label>
-
-            <span class="starability-focus-ring"></span>
+            <label for="rate<%= i %>"
+              ><%= i %> star<%= i > 1 ? 's' : '' %></label
+            >
+            <% } %>
           </fieldset>
         </div>
         <div class="mb-3">
@@ -97,7 +111,7 @@
     <h2>Reviews</h2>
     <% if (campground.reviews.length === 0) { %>
     <p class="text-muted">No reviews yet.</p>
-    <% } else { %> <% for (let review of campground.reviews) { %>
+    <% } else { %> <% campground.reviews.forEach(review => { %>
     <div class="card mb-3">
       <div class="card-body">
         <h6 class="card-subtitle text-muted mb-3">
@@ -117,6 +131,6 @@
         <% } %>
       </div>
     </div>
-    <% } %> <% } %>
+    <% }) %> <% } %>
   </div>
 </div>
