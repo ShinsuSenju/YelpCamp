@@ -1,4 +1,13 @@
 <% layout('layout/boilerplate')%>
+<script>
+  const maptilerApiKey = "<%- process.env.MAPTILER_KEY %>";
+  const campgrounds = {
+    features: <%- JSON.stringify(campgrounds) %>
+  };
+  console.log(campgrounds);
+</script>
+<!--CLUSTER MAP-->
+<div id="map" style="width: 500px; height: 500px"></div>
 <h1>All Campgrounds</h1>
 <a href="/campgrounds/new" class="btn btn-success mt-3 mb-3">Add Campground</a>
 
@@ -12,10 +21,10 @@
         alt="<%=campground.title %>"
         class="img-fluid"
       />
-      <% } else { %> <
+      <% } else { %>
       <img
-        src="https://unsplash.com/photos/ocean-smashed-to-sand-during-golden-hour-Ete0zMKPWys"
-        alt="<%=campground.title %>"
+        src="https://via.placeholder.com/400x300?text=No+Image+Available"
+        alt="<%= campground.title %>"
         class="img-fluid"
       />
       <% } %>
@@ -27,12 +36,13 @@
         <p class="card-text">
           <small class="text-muted"><%=campground.location%></small>
         </p>
-        <a href="/Campgrounds/<%=campground._id%>" class="btn btn-primary"
-          >View <%=campground.title%></a
-        >
+        <a href="/campgrounds/<%=campground._id%>" class="btn btn-primary">
+          View <%=campground.title%>
+        </a>
       </div>
     </div>
   </div>
 </div>
 
 <% } %>
+<script src="/javascripts/clusterMap.js"></script>

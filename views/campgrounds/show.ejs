@@ -80,6 +80,7 @@
 
   <!-- Right Column: Leave a Review and Reviews Section -->
   <div class="col-md-6">
+    <!--MAP-->
     <div id="map" style="width: 400px; height: 300px"></div>
     <!-- Leave a Review Form -->
     <div class="mb-4">
@@ -88,13 +89,9 @@
         <div class="mb-3">
           <fieldset class="starability-grow">
             <legend>Rating</legend>
-            <% for (let i = 1; i <= 5; i++) { %>
-            <input
-              type="radio"
-              id="rate<%= i %>"
-              name="review[rating]"
-              value="<%= i %>"
-            />
+            <% for (let i = 1; i <= 5; i++) { %> <input type="radio" id="rate<%=
+            i %>" name="review[rating]" value="<%= i %>" <%= i === 5 ? 'checked'
+            : '' %> />
             <label for="rate<%= i %>"
               ><%= i %> star<%= i > 1 ? 's' : '' %></label
             >
