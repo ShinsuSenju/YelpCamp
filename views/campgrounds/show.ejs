@@ -1,5 +1,10 @@
 <% layout('layout/boilerplate') %>
 <link rel="stylesheet" href="/stylesheets/stars.css" />
+<script>
+  const maptilerApiKey = "<%- process.env.MAPTILER_KEY %>";
+  const campground = <%- JSON.stringify(campground) %>; // Pass campground as a JavaScript variable
+  console.log(campground); // Debugging: Check if campground is defined
+</script>
 
 <div class="row">
   <!-- Left Column: Campground Details -->
@@ -11,6 +16,8 @@
           <% campground.images.forEach((img, idx) => { %>
           <div class="carousel-item <%= idx === 0 ? 'active' : '' %>">
             <img
+              width="200px"
+              height="200px"
               src="<%= img.url %>"
               class="d-block w-100"
               alt="<%= campground.title %>"
@@ -73,6 +80,7 @@
 
   <!-- Right Column: Leave a Review and Reviews Section -->
   <div class="col-md-6">
+    <div id="map" style="width: 400px; height: 300px"></div>
     <!-- Leave a Review Form -->
     <div class="mb-4">
       <h2>Leave A Review</h2>
@@ -134,3 +142,4 @@
     <% }) %> <% } %>
   </div>
 </div>
+<script src="/javascripts/showMap.js"></script>
