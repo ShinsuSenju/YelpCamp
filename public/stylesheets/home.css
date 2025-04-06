@@ -1,0 +1,97 @@
+/* Basic body styling with fade-in background */
+body {
+  height: 100vh;
+  margin: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("https://images.unsplash.com/photo-1559521783-1d1599583485?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80")
+      no-repeat center center / cover;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  animation: fadeInBody 2s ease-in;
+}
+
+/* Container animation */
+.cover-container {
+  max-width: 60vw;
+  animation: slideUp 1.3s ease-out;
+}
+
+/* Fancy nav link styles */
+.nav-link {
+  position: relative;
+  padding: 0.5rem;
+  margin-left: 1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.8);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+  color: white;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-link.active {
+  color: white;
+}
+
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Button with bounce and glow */
+.btn-secondary {
+  background-color: white;
+  color: #212529;
+  font-weight: 600;
+  border: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-secondary:hover {
+  transform: scale(1.05);
+  background-color: #f0f0f0;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+}
+
+/* Footer */
+footer {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Animations */
+@keyframes fadeInBody {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
